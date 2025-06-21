@@ -6,11 +6,13 @@ import App from './containers/App';
 import 'tachyons';
 // import registerServiceWorker from './registerServiceWorker';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
 import { searchRobots } from './reducers';
 import {Provider} from 'react-redux'
 
-const store = createStore(searchRobots)
+const logger = createLogger();
+const store = createStore(searchRobots, applyMiddleware(logger))
 const root = createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
